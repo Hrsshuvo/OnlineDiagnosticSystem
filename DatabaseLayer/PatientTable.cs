@@ -11,7 +11,8 @@ namespace DatabaseLayer
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class PatientTable
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,7 +24,10 @@ namespace DatabaseLayer
     
         public int PatientID { get; set; }
         public int UserID { get; set; }
+        [Required(ErrorMessage = "* Required!")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "* Required!")]
+        [DataType(DataType.PhoneNumber)]
         public string ContactNo { get; set; }
         public string Email { get; set; }
         public string Description { get; set; }

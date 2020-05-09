@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OnlineDiagnosticLabSystemDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="OnlineDiagnosticLabSystemDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccountTypeTable">
           <Key>
             <PropertyRef Name="AccountTypeID" />
@@ -162,6 +162,7 @@
           <Property Name="Email" Type="nvarchar" MaxLength="100" />
           <Property Name="ContactNo" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsVerifed" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="UserTypeTable">
           <Key>
@@ -506,8 +507,7 @@
             <End Role="UserTable" EntitySet="UserTable" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OnlineDiagnosticLabSystemDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -706,6 +706,7 @@
           <NavigationProperty Name="DoctorTables" Relationship="Self.FK_DoctorTable_UserTable1" FromRole="UserTable" ToRole="DoctorTable" />
           <NavigationProperty Name="LabTables" Relationship="Self.FK_LabTable_UserTable1" FromRole="UserTable" ToRole="LabTable" />
           <NavigationProperty Name="UserTypeTable" Relationship="Self.FK_UserTable_UserTypeTable1" FromRole="UserTable" ToRole="UserTypeTable" />
+          <Property Name="IsVerifed" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="UserTypeTable">
           <Key>
@@ -1219,6 +1220,7 @@
           <EntitySetMapping Name="UserTables">
             <EntityTypeMapping TypeName="OnlineDiagnosticLabSystemDbModel.UserTable">
               <MappingFragment StoreEntitySet="UserTable">
+                <ScalarProperty Name="IsVerifed" ColumnName="IsVerifed" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
