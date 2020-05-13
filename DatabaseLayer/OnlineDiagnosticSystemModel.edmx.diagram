@@ -39,6 +39,9 @@
         <AssociationConnector Association="OnlineDiagnosticLabSystemDbModel.FK_PatientTestDetailTable_LabTestDetailsTable1" ManuallyRouted="false" />
         <AssociationConnector Association="OnlineDiagnosticLabSystemDbModel.FK_PatientTable_UserTypeTable" ManuallyRouted="false" />
         <AssociationConnector Association="OnlineDiagnosticLabSystemDbModel.FK_UserTable_UserTypeTable1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="OnlineDiagnosticLabSystemDbModel.GenderTable" Width="1.5" PointX="3.375" PointY="0.875" />
+        <AssociationConnector Association="OnlineDiagnosticLabSystemDbModel.FK_DoctorTable_GenderTable" />
+        <AssociationConnector Association="OnlineDiagnosticLabSystemDbModel.FK_PatientTable_GenderTable" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

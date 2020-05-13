@@ -26,25 +26,25 @@ namespace DatabaseLayer
     
         public int LabID { get; set; }
         public int UserID { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "*Required!")]
         public string Photo { get; set; }
-        [Required(ErrorMessage = "* Required!")]
-        [DataType(DataType.PhoneNumber)]
+        [Required(ErrorMessage = "*Required!")]
         public string ContactNo { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         [DataType(DataType.PhoneNumber)]
         public string PhoneNo { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         [DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         public string PermanentAddress { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         public string AboutLab { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         public int AccountTypeID { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         public string AccountNo { get; set; }
     
         public virtual AccountTypeTable AccountTypeTable { get; set; }

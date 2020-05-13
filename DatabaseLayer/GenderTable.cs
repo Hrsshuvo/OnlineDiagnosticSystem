@@ -11,24 +11,22 @@ namespace DatabaseLayer
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    public partial class UserTypeTable
+    
+    public partial class GenderTable
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UserTypeTable()
+        public GenderTable()
         {
+            this.DoctorTables = new HashSet<DoctorTable>();
             this.PatientTables = new HashSet<PatientTable>();
-            this.UserTables = new HashSet<UserTable>();
         }
     
-        public int UserTypeID { get; set; }
-        [Required(ErrorMessage = "*Required!")]
-        public string UserType { get; set; }
+        public int GenderID { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PatientTable> PatientTables { get; set; }
+        public virtual ICollection<DoctorTable> DoctorTables { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserTable> UserTables { get; set; }
+        public virtual ICollection<PatientTable> PatientTables { get; set; }
     }
 }

@@ -16,11 +16,11 @@ namespace DatabaseLayer
     public partial class PatientTestDetailTable
     {
         public int LabAppointDetailID { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         public int LabAppointID { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         public int LabTestDetailID { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         public int PatientValue { get; set; }
     
         public virtual LabAppointTable LabAppointTable { get; set; }

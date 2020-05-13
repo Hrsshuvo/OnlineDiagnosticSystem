@@ -23,17 +23,17 @@ namespace DatabaseLayer
         }
     
         public int UserID { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         public int UserTypeID { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         public string UserName { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         [DataType(DataType.PhoneNumber)]
         public string ContactNo { get; set; }
         public string Description { get; set; }

@@ -22,21 +22,21 @@ namespace DatabaseLayer
         }
     
         public int LabAppointID { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         public int LabTestID { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         public int PatientID { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         public int LabID { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         public int LabTimeSlotID { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         [DataType(DataType.Date)]
         public System.DateTime AppointDate { get; set; }
         public bool IsFeeSubmit { get; set; }
         public bool IsComplete { get; set; }
         public string Description { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         public string TransectionNo { get; set; }
     
         public virtual LabTable LabTable { get; set; }

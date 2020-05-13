@@ -22,14 +22,14 @@ namespace DatabaseLayer
         }
     
         public int LabTimeSlotID { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         public int LabID { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         [DataType(DataType.Time)]
         public System.TimeSpan ToTime { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         [DataType(DataType.Time)]
         public System.TimeSpan FromTime { get; set; }
         [Display(Name ="Status")]

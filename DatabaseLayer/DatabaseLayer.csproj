@@ -62,6 +62,9 @@
     <Compile Include="DoctorTimeSlotTable.cs">
       <DependentUpon>OnlineDiagnosticSystemModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GenderTable.cs">
+      <DependentUpon>OnlineDiagnosticSystemModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="LabAppointTable.cs">
       <DependentUpon>OnlineDiagnosticSystemModel.tt</DependentUpon>
     </Compile>

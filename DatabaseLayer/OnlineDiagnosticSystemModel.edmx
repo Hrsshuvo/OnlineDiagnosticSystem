@@ -46,6 +46,7 @@
           <Property Name="Photo" Type="nvarchar" MaxLength="300" />
           <Property Name="AccountTypeID" Type="int" Nullable="false" />
           <Property Name="AccountNo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="GenderID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DoctorTimeSlotTable">
           <Key>
@@ -57,6 +58,13 @@
           <Property Name="ToTime" Type="time" Precision="7" Nullable="false" />
           <Property Name="FromTime" Type="time" Precision="7" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GenderTable">
+          <Key>
+            <PropertyRef Name="GenderID" />
+          </Key>
+          <Property Name="GenderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="LabAppointTable">
           <Key>
@@ -131,6 +139,7 @@
           <Property Name="Email" Type="nvarchar" MaxLength="100" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="Photo" Type="nvarchar" MaxLength="300" />
+          <Property Name="GenderID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PatientTestDetailTable">
           <Key>
@@ -216,6 +225,18 @@
             </Principal>
             <Dependent Role="DoctorTable">
               <PropertyRef Name="AccountTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorTable_GenderTable">
+          <End Role="GenderTable" Type="Self.GenderTable" Multiplicity="1" />
+          <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GenderTable">
+              <PropertyRef Name="GenderID" />
+            </Principal>
+            <Dependent Role="DoctorTable">
+              <PropertyRef Name="GenderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -363,6 +384,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PatientTable_GenderTable">
+          <End Role="GenderTable" Type="Self.GenderTable" Multiplicity="1" />
+          <End Role="PatientTable" Type="Self.PatientTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GenderTable">
+              <PropertyRef Name="GenderID" />
+            </Principal>
+            <Dependent Role="PatientTable">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PatientTable_UserTypeTable">
           <End Role="UserTypeTable" Type="Self.UserTypeTable" Multiplicity="1" />
           <End Role="PatientTable" Type="Self.PatientTable" Multiplicity="*" />
@@ -416,6 +449,7 @@
           <EntitySet Name="DoctorAppointTable" EntityType="Self.DoctorAppointTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DoctorTable" EntityType="Self.DoctorTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DoctorTimeSlotTable" EntityType="Self.DoctorTimeSlotTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GenderTable" EntityType="Self.GenderTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LabAppointTable" EntityType="Self.LabAppointTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LabTable" EntityType="Self.LabTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LabTestDetailsTable" EntityType="Self.LabTestDetailsTable" Schema="dbo" store:Type="Tables" />
@@ -440,6 +474,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_DoctorTable_AccountTypeTable1" Association="Self.FK_DoctorTable_AccountTypeTable1">
             <End Role="AccountTypeTable" EntitySet="AccountTypeTable" />
+            <End Role="DoctorTable" EntitySet="DoctorTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorTable_GenderTable" Association="Self.FK_DoctorTable_GenderTable">
+            <End Role="GenderTable" EntitySet="GenderTable" />
             <End Role="DoctorTable" EntitySet="DoctorTable" />
           </AssociationSet>
           <AssociationSet Name="FK_DoctorTable_UserTable1" Association="Self.FK_DoctorTable_UserTable1">
@@ -489,6 +527,10 @@
           <AssociationSet Name="FK_LabTimeSlotTable_LabTable1" Association="Self.FK_LabTimeSlotTable_LabTable1">
             <End Role="LabTable" EntitySet="LabTable" />
             <End Role="LabTimeSlotTable" EntitySet="LabTimeSlotTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientTable_GenderTable" Association="Self.FK_PatientTable_GenderTable">
+            <End Role="GenderTable" EntitySet="GenderTable" />
+            <End Role="PatientTable" EntitySet="PatientTable" />
           </AssociationSet>
           <AssociationSet Name="FK_PatientTable_UserTypeTable" Association="Self.FK_PatientTable_UserTypeTable">
             <End Role="UserTypeTable" EntitySet="UserTypeTable" />
@@ -561,6 +603,8 @@
           <NavigationProperty Name="DoctorAppointTables" Relationship="Self.FK_DoctorAppointTable_DoctorTable1" FromRole="DoctorTable" ToRole="DoctorAppointTable" />
           <NavigationProperty Name="UserTable" Relationship="Self.FK_DoctorTable_UserTable1" FromRole="DoctorTable" ToRole="UserTable" />
           <NavigationProperty Name="DoctorTimeSlotTables" Relationship="Self.FK_DoctorTimeSlotTable_DoctorTable1" FromRole="DoctorTable" ToRole="DoctorTimeSlotTable" />
+          <Property Name="GenderID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="GenderTable" Relationship="OnlineDiagnosticLabSystemDbModel.FK_DoctorTable_GenderTable" FromRole="DoctorTable" ToRole="GenderTable" />
         </EntityType>
         <EntityType Name="DoctorTimeSlotTable">
           <Key>
@@ -670,6 +714,8 @@
           <NavigationProperty Name="DoctorAppointTables" Relationship="Self.FK_DoctorAppointTable_PatientTable1" FromRole="PatientTable" ToRole="DoctorAppointTable" />
           <NavigationProperty Name="LabAppointTables" Relationship="Self.FK_LabAppointTable_PatientTable1" FromRole="PatientTable" ToRole="LabAppointTable" />
           <NavigationProperty Name="UserTypeTable" Relationship="Self.FK_PatientTable_UserTypeTable" FromRole="PatientTable" ToRole="UserTypeTable" />
+          <Property Name="GenderID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="GenderTable" Relationship="OnlineDiagnosticLabSystemDbModel.FK_PatientTable_GenderTable" FromRole="PatientTable" ToRole="GenderTable" />
         </EntityType>
         <EntityType Name="PatientTestDetailTable">
           <Key>
@@ -1052,7 +1098,49 @@
             <End Role="UserTypeTable" EntitySet="UserTypeTables" />
             <End Role="UserTable" EntitySet="UserTables" />
           </AssociationSet>
+          <EntitySet Name="GenderTables" EntityType="OnlineDiagnosticLabSystemDbModel.GenderTable" />
+          <AssociationSet Name="FK_DoctorTable_GenderTable" Association="OnlineDiagnosticLabSystemDbModel.FK_DoctorTable_GenderTable">
+            <End Role="GenderTable" EntitySet="GenderTables" />
+            <End Role="DoctorTable" EntitySet="DoctorTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientTable_GenderTable" Association="OnlineDiagnosticLabSystemDbModel.FK_PatientTable_GenderTable">
+            <End Role="GenderTable" EntitySet="GenderTables" />
+            <End Role="PatientTable" EntitySet="PatientTables" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="GenderTable">
+          <Key>
+            <PropertyRef Name="GenderID" />
+          </Key>
+          <Property Name="GenderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="DoctorTables" Relationship="OnlineDiagnosticLabSystemDbModel.FK_DoctorTable_GenderTable" FromRole="GenderTable" ToRole="DoctorTable" />
+          <NavigationProperty Name="PatientTables" Relationship="OnlineDiagnosticLabSystemDbModel.FK_PatientTable_GenderTable" FromRole="GenderTable" ToRole="PatientTable" />
+        </EntityType>
+        <Association Name="FK_DoctorTable_GenderTable">
+          <End Type="OnlineDiagnosticLabSystemDbModel.GenderTable" Role="GenderTable" Multiplicity="1" />
+          <End Type="OnlineDiagnosticLabSystemDbModel.DoctorTable" Role="DoctorTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GenderTable">
+              <PropertyRef Name="GenderID" />
+            </Principal>
+            <Dependent Role="DoctorTable">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientTable_GenderTable">
+          <End Type="OnlineDiagnosticLabSystemDbModel.GenderTable" Role="GenderTable" Multiplicity="1" />
+          <End Type="OnlineDiagnosticLabSystemDbModel.PatientTable" Role="PatientTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GenderTable">
+              <PropertyRef Name="GenderID" />
+            </Principal>
+            <Dependent Role="PatientTable">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1086,6 +1174,7 @@
           <EntitySetMapping Name="DoctorTables">
             <EntityTypeMapping TypeName="OnlineDiagnosticLabSystemDbModel.DoctorTable">
               <MappingFragment StoreEntitySet="DoctorTable">
+                <ScalarProperty Name="GenderID" ColumnName="GenderID" />
                 <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1186,6 +1275,7 @@
           <EntitySetMapping Name="PatientTables">
             <EntityTypeMapping TypeName="OnlineDiagnosticLabSystemDbModel.PatientTable">
               <MappingFragment StoreEntitySet="PatientTable">
+                <ScalarProperty Name="GenderID" ColumnName="GenderID" />
                 <ScalarProperty Name="PatientID" ColumnName="PatientID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1236,6 +1326,14 @@
               <MappingFragment StoreEntitySet="UserTypeTable">
                 <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
                 <ScalarProperty Name="UserType" ColumnName="UserType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GenderTables">
+            <EntityTypeMapping TypeName="OnlineDiagnosticLabSystemDbModel.GenderTable">
+              <MappingFragment StoreEntitySet="GenderTable">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GenderID" ColumnName="GenderID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

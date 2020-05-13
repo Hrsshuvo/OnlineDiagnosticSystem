@@ -39,5 +39,6 @@ namespace DatabaseLayer
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<UserTable> UserTables { get; set; }
         public virtual DbSet<UserTypeTable> UserTypeTables { get; set; }
+        public virtual DbSet<GenderTable> GenderTables { get; set; }
     }
 }

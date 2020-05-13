@@ -24,19 +24,23 @@ namespace DatabaseLayer
     
         public int PatientID { get; set; }
         public int UserID { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "* Required!")]
+        [Required(ErrorMessage = "*Required!")]
         [DataType(DataType.PhoneNumber)]
         public string ContactNo { get; set; }
+        [DataType(DataType.Text)]
         public string Email { get; set; }
         public string Description { get; set; }
         public string Photo { get; set; }
+        [Required(ErrorMessage = "*Required!")]
+        public int GenderID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DoctorAppointTable> DoctorAppointTables { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LabAppointTable> LabAppointTables { get; set; }
         public virtual UserTypeTable UserTypeTable { get; set; }
+        public virtual GenderTable GenderTable { get; set; }
     }
 }
